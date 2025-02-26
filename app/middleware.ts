@@ -9,8 +9,9 @@ export default async function middleware(
     event.waitUntil(
         (async () => {
             const geo = geolocation(req);
+            const isVercel = process.env.VERCEL === "1";
             await new Promise((resolve) => setTimeout(resolve, 1000));
-            console.log("middleware", geo);
+            console.log("middleware", geo, isVercel);
         })()
     );
 
