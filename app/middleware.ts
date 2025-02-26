@@ -1,3 +1,4 @@
+import { geolocation } from "@vercel/functions";
 import { NextResponse } from "next/server";
 import type { NextFetchEvent, NextRequest } from "next/server";
 
@@ -7,8 +8,9 @@ export default async function middleware(
 ) {
     event.waitUntil(
         (async () => {
+            const geo = geolocation(req);
             await new Promise((resolve) => setTimeout(resolve, 1000));
-            console.log("middleware");
+            console.log("middleware", geo);
         })()
     );
 
